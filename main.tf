@@ -26,11 +26,14 @@ resource "azurerm_linux_function_app" "fa" {
   service_plan_id            = azurerm_app_service_plan.asp.id
   storage_account_name       = azurerm_storage_account.sa.name
   storage_account_access_key = azurerm_storage_account.sa.primary_access_key
-  os_type                    = "linux"
-  runtime_stack              = "python"
-  version                    = "~3"
   app_settings = {
     "WEBSITE_RUN_FROM_PACKAGE" = "1"
+  }
+  site_config {
+    application_stack {
+      python_version = 3.12
+    }
+    
   }
 }
 
